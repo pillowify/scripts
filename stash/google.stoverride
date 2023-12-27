@@ -1,0 +1,9 @@
+name: Google 302 
+desc: 
+
+http: 
+  mitm: 
+    - g.cn
+    - "*.google.cn" 
+  rewrite: 
+    - ^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
