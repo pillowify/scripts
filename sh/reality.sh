@@ -9,15 +9,15 @@ init() {
 
 install_xray() {
     bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+}
+
+configure_xray() {
     xray x25519 > /var/key
     private_key=$(grep "Private key:" /var/key | cut -d ' ' -f 3)
     public_key=$(grep "Public key:" /var/key | cut -d ' ' -f 3)
     uuid=$(xray uuid)
     cat > /usr/local/etc/xray/config.json << EOF
 {
-    "log": {
-        "loglevel": "debug"
-    },
     "inbounds": [
         {
             "port": ${port}, 
@@ -58,13 +58,11 @@ install_xray() {
     ],
     "outbounds": [
         {
-            "protocol": "freedom",
-            "tag": "direct"
+            "protocol": "freedom"
         }
     ]
 }
 EOF
-    
 }
 
 launch() {
@@ -81,6 +79,7 @@ print() {
 main() {
     init
     install_xray
+    configure_xray
     launch
     print
 }
