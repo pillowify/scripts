@@ -7,7 +7,7 @@ init() {
     port=${port:-16122}
     ip=$(curl -s -4 ip.sb)
     ${INSTALL_CMD} update
-    ${INSTALL_CMD} install -y vim curl wget
+    ${INSTALL_CMD} install -y vim curl wget cron
 }
 
 install_sing_box() {
@@ -17,6 +17,7 @@ install_sing_box() {
     echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/sagernet.asc] https://deb.sagernet.org/ * *" | tee /etc/apt/sources.list.d/sagernet.list > /dev/null
     apt update
     apt install sing-box
+    (crontab -l; echo "0 4 * * * systemctl restart sing-box") | crontab -
 }
 
 configure_sing_box() {
