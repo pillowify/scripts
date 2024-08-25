@@ -5,9 +5,9 @@ NC="\033[0m"
 init() {
     read -p "Listening Port [16122]: " port
     port=${port:-16122}
-    ip=$(curl -s -4 ip.sb)
     ${INSTALL_CMD} update
     ${INSTALL_CMD} install -y vim curl wget cron
+    ip=$(curl -s -4 ip.sb)
 }
 
 install_sing_box() {

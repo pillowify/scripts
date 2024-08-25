@@ -9,9 +9,9 @@ init() {
     dest=${dest_domain:-www.tesla.com:443}
     dest_host=$(echo $dest | cut -d':' -f1)
     dest_port=$(echo $dest | cut -d':' -f2)
-    ip=$(curl -s -4 ip.sb)
     ${INSTALL_CMD} update
     ${INSTALL_CMD} install -y vim curl wget cron
+    ip=$(curl -s -4 ip.sb)
 }
 
 install_sing_box() {
